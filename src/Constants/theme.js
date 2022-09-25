@@ -25,6 +25,8 @@ export const COLORS = {
   ubeSolid: '#9582cc',
   darkGreen: '#4e8a78',
   darkRed: '#DF0100',
+  darkBlack: '#333',
+  purpule: '#297CAB',
 };
 export const SIZES = {
   // global sizes

@@ -1,15 +1,103 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import Icons from 'react-native-vector-icons/Ionicons';
+
+import {COLORS} from '../Constants';
+import ComponentHeader from '../Components/ComponentHeader';
+import Upcommingscreen from '../Screens/Upcommingscreen';
+import Livescreen from '../Screens/Livescreen';
+import Completescreen from '../Screens/Completescreen';
 
 const Matchscreen = ({route}) => {
   console.log(' -------------->', route?.params?.matchInfo?.item);
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'first', title: 'Upcoming'},
+    {key: 'second', title: 'Live'},
+    {key: 'third', title: 'Completed'},
+  ]);
+  const layout = useWindowDimensions();
+
+  const renderScene = SceneMap({
+    first: Upcommingscreen,
+    second: Livescreen,
+    third: Completescreen,
+  });
+
   return (
-    <View>
-      <Text>Matchscreen</Text>
+    <View style={styles.container}>
+      <ComponentHeader
+        iconName="ios-chevron-back"
+        firstTextName={`${route?.params?.matchInfo?.item?.title} MATCHES`}
+      />
+
+      <TabView
+        navigationState={{index, routes}}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{width: layout.width}}
+        showPageIndicator={true}
+        renderTabBar={props => (
+          <TabBar
+            {...props}
+            activeColor={COLORS.white}
+            indicatorStyle={styles.indicatorStyle}
+            style={styles.tabBar}
+            renderLabel={({focused, route}) => {
+              return (
+                <Text
+                  style={{
+                    color: focused ? COLORS?.white : '#f5f5f5 ',
+                    fontFamily: 'OpenSans-Medium',
+                    padding: 5,
+                  }}>
+                  {route.title}
+                </Text>
+              );
+            }}
+            renderIcon={({route, focused}) => (
+              <Icons
+                name={
+                  route?.title === 'Upcoming'
+                    ? 'timer-outline'
+                    : route?.title === 'Live'
+                    ? 'videocam-outline'
+                    : 'ios-checkmark-circle-outline'
+                }
+                color={focused ? COLORS?.white : '#f5f5f5 '}
+                size={18}
+              />
+            )}
+          />
+        )}
+      />
     </View>
   );
 };
 
-export default Matchscreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.lightWhite,
+  },
+  tabContainer: {
+    borderWidth: 1,
+  },
+  indicatorStyle: {
+    backgroundColor: COLORS.white,
+  },
+  tabBar: {
+    borderBottomRightRadius: hp(5),
+    borderBottomLeftRadius: hp(5),
+    overflow: 'hidden',
+    backgroundColor: COLORS.primary,
+    justifyContent: 'center',
+  },
+});
 
-const styles = StyleSheet.create({});
+export default Matchscreen;

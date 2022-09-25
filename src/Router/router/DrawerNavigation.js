@@ -24,7 +24,7 @@ const DrawerNavigation = () => {
         },
         drawerActiveBackgroundColor: COLORS.primary,
         drawerActiveTintColor: COLORS.white,
-        drawerInactiveTintColor: '#333',
+        drawerInactiveTintColor: COLORS.darkBlack,
       }}
       useLegacyImplementation
       drawerContent={props => <CustomDrawer {...props} />}>

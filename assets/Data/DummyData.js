@@ -48,3 +48,5 @@ export const DUMMY_SPORT = [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQrvZ49GAokjZ3ccNGC8igR0pCCjodzUysA&usqp=CAU',
   },
 ];
+
+export const CRICKER_DATA = [{}];

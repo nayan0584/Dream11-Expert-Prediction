@@ -10,6 +10,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 const CustomDrawer = props => {
   return (
@@ -38,10 +42,15 @@ const CustomDrawer = props => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
+
       <View style={styles.appRatecontainer}>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row'}}>
-            <Ionicons name="share-social-outline" size={22} color="#333" />
+            <Ionicons
+              name="share-social-outline"
+              size={22}
+              color={COLORS.darkBlack}
+            />
             <Text style={styles.footerText}>App Share</Text>
           </View>
         </TouchableOpacity>
@@ -50,7 +59,7 @@ const CustomDrawer = props => {
       <View style={styles.appRatecontainer}>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row'}}>
-            <FontAwesome name="star" size={22} color="#333" />
+            <FontAwesome name="star" size={22} color={COLORS.darkBlack} />
             <Text style={styles.footerText}>App Rate</Text>
           </View>
         </TouchableOpacity>
@@ -64,38 +73,42 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   imageBackContainer: {
-    padding: 20,
-    top: -10,
-    height: 210,
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    padding: hp(3.5),
+    top: hp(-1),
+    height: hp(29),
+    borderBottomLeftRadius: wp(5),
+    borderBottomRightRadius: wp(5),
     overflow: 'hidden',
   },
   imageHandle: {
-    height: 80,
-    width: 80,
-    borderRadius: 40,
-    marginVertical: 20,
+    height: hp(11),
+    width: wp(22),
+    borderRadius: wp(11),
+    marginVertical: wp(5.5),
   },
   textStyle: {
     color: COLORS.white,
     fontFamily: 'Inter-Bold',
-    fontSize: 16,
+    fontSize: wp(4.5),
   },
   footerText: {
-    fontSize: 14,
+    fontSize: wp(4),
     fontFamily: 'Inter-Medium',
-    marginStart: 10,
-    color: '#333',
+    marginStart: hp(3),
+    color: COLORS.darkBlack,
   },
   premiumText: {
     color: COLORS.white,
-    fontSize: 14,
+    fontSize: wp(4),
     fontFamily: 'Inter-Medium',
-    marginStart: 10,
+    marginStart: wp(3),
   },
-  bottomContainer: {backgroundColor: COLORS.white, flex: 1, paddingTop: 10},
-  appRatecontainer: {padding: 5, marginStart: 15, borderTopColor: '#ccc'},
+  bottomContainer: {backgroundColor: COLORS.white, flex: 1, paddingTop: wp(3)},
+  appRatecontainer: {
+    padding: hp(0.3),
+    marginStart: wp(4),
+    borderTopColor: COLORS.greySolid,
+  },
 });
 
 export default CustomDrawer;
