@@ -14,14 +14,14 @@ import Livescreen from '../Screens/Livescreen';
 import Completescreen from '../Screens/Completescreen';
 
 const Matchscreen = ({route}) => {
-  console.log(' -------------->', route?.params?.matchInfo?.item);
+  // console.log(' -------------->', route?.params?.matchInfo?.item);
+  const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     {key: 'first', title: 'Upcoming'},
     {key: 'second', title: 'Live'},
     {key: 'third', title: 'Completed'},
   ]);
-  const layout = useWindowDimensions();
 
   const renderScene = SceneMap({
     first: Upcommingscreen,
@@ -84,16 +84,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.lightWhite,
-  },
-  tabContainer: {
-    borderWidth: 1,
+    // backgroundColor: 'transparent',
+    // backgroundColor: 'rgba(255, 255, 255, 0)',
+    // backgroundColor: 'rgba(52, 52, 52, alpha)',
   },
   indicatorStyle: {
     backgroundColor: COLORS.white,
   },
   tabBar: {
-    borderBottomRightRadius: hp(5),
-    borderBottomLeftRadius: hp(5),
+    borderBottomRightRadius: hp(4),
+    borderBottomLeftRadius: hp(4),
     overflow: 'hidden',
     backgroundColor: COLORS.primary,
     justifyContent: 'center',
