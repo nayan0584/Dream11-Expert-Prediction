@@ -1,7 +1,8 @@
 import React from 'react';
-import {LogBox, StatusBar} from 'react-native';
+import {LogBox, StatusBar, View} from 'react-native';
 import Router from './src/Router';
 import {COLORS} from './src/Constants/index';
+import FlashMessage from 'react-native-flash-message';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -11,10 +12,11 @@ LogBox.ignoreLogs([
 
 const App = () => {
   return (
-    <>
+    <View style={{flex: 1}}>
       <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
       <Router />
-    </>
+      <FlashMessage position="top" />
+    </View>
   );
 };
 

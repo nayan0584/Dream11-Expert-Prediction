@@ -2,6 +2,8 @@ import Teamselectionscreen from '../../Screens/Teamselectionscreen';
 import Homescreen from './../../Screens/Homescreem';
 import Matchscreen from './../../Screens/Matchscreen';
 import Policyscreen from './../../Screens/Policyscreen';
+import Teamscreen from '../../Screens/Teamscreen';
+import Fullscreenteam from '../../Screens/Fullscreenteam';
 
 export default routes = [
   {key: 'Homescreen', name: 'Homescreen', component: Homescreen},
@@ -12,4 +14,6 @@ export default routes = [
     name: 'Teamselectionscreen',
     component: Teamselectionscreen,
   },
+  {key: 'Teamscreen', name: 'Teamscreen', component: Teamscreen},
+  {key: 'Fullscreenteam', name: 'Fullscreenteam', component: Fullscreenteam},
 ];
