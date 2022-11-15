@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   DrawerContentScrollView,
-  DrawerItem,
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
@@ -14,8 +13,13 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import {BannerAds} from '../../Ads';
+import {BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {useSelector} from 'react-redux';
 
 const CustomDrawer = props => {
+  const {AppDetail} = useSelector(state => state.Detail);
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -32,8 +36,10 @@ const CustomDrawer = props => {
 
           <View style={{marginTop: 5}}>
             <TouchableOpacity style={{flexDirection: 'row'}}>
-              <FontAwesome name="money" color={COLORS.white} size={18} />
-              <Text style={styles.premiumText}>Premium Purchase</Text>
+              <FontAwesome name="info-circle" color={COLORS.white} size={18} />
+              <Text style={styles.premiumText}>
+                Version {AppDetail?.ResultData?.app_version}
+              </Text>
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -64,6 +70,8 @@ const CustomDrawer = props => {
           </View>
         </TouchableOpacity>
       </View>
+
+      {BannerAds(BannerAdSize.BANNER, TestIds.BANNER)}
     </View>
   );
 };

@@ -11,6 +11,7 @@ import Icons from 'react-native-vector-icons/FontAwesome';
 import {TEAMTYPE} from '../../assets/Data/DummyData';
 import {FlatList} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
 
 const Teamselectionscreen = () => {
   const navigation = useNavigation();
@@ -62,13 +63,7 @@ const Teamselectionscreen = () => {
         />
       </View>
 
-      {/* here advertisement setup */}
-      <View style={{flex: 0.1, borderTopWidth: 1, justifyContent: 'center'}}>
-        <Text style={[{color: COLORS.black, alignSelf: 'center'}]}>
-          Adverticement Pannel
-        </Text>
-        {/* here advertisement setup */}
-      </View>
+      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
     </View>
   );
 };

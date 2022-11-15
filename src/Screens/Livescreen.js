@@ -3,6 +3,7 @@ import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import UpcommingMatchCard from '../Components/UpcommingMatchCard';
 import {COLORS} from '../Constants';
+import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
 
 const Livescreen = () => {
   return (
@@ -16,13 +17,7 @@ const Livescreen = () => {
         <UpcommingMatchCard />
       </ScrollView>
 
-      {/* here advertisement setup */}
-      <View style={{flex: 0.12, borderTopWidth: 1, justifyContent: 'center'}}>
-        <Text style={[{color: COLORS.black, alignSelf: 'center'}]}>
-          Adverticement Pannel
-        </Text>
-        {/* here advertisement setup */}
-      </View>
+      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
     </View>
   );
 };

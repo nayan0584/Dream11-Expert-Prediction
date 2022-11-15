@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 import {
   heightPercentageToDP as hp,
@@ -14,13 +14,12 @@ import Livescreen from '../Screens/Livescreen';
 import Completescreen from '../Screens/Completescreen';
 
 const Matchscreen = ({route}) => {
-  // console.log(' -------------->', route?.params?.matchInfo?.item);
   const layout = useWindowDimensions();
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    {key: 'first', title: 'Upcoming'},
-    {key: 'second', title: 'Live'},
-    {key: 'third', title: 'Completed'},
+    {key: 'first', title: 'Upcoming', category_id: route?.params?.category_id},
+    {key: 'second', title: 'Live', category_id: route?.params?.category_id},
+    {key: 'third', title: 'Completed', category_id: route?.params?.category_id},
   ]);
 
   const renderScene = SceneMap({
@@ -33,7 +32,7 @@ const Matchscreen = ({route}) => {
     <View style={styles.container}>
       <ComponentHeader
         iconName="ios-chevron-back"
-        firstTextName={`${route?.params?.matchInfo?.item?.title} MATCHES`}
+        firstTextName={`${route?.params?.playName} MATCHES`}
       />
 
       <TabView

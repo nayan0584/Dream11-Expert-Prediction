@@ -7,46 +7,69 @@ import {
 } from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
 
-const UpcommingMatchCard = () => {
+const UpcommingMatchCard = ({matchDetail}) => {
   const navigation = useNavigation();
+  const shortDate = new Date(matchDetail?.item?.match_date);
 
   return (
     <TouchableOpacity
       style={styles.cardContainerView}
       onPress={() => navigation.navigate('Teamselectionscreen')}>
       <View style={styles.topContainer}>
-        <Text style={styles.topContainerText}>Asia Cup 2022</Text>
+        <Text style={styles.topContainerText}>
+          {matchDetail?.item?.tournament_name}
+        </Text>
       </View>
 
       <View style={styles.middleContainer}>
         <View style={styles.middleFirstContainer}>
-          <Text style={styles.lastText}>South Africa</Text>
-          <Text style={styles.lastText}>India</Text>
+          <Text style={styles.lastText}>
+            {matchDetail?.item?.team1data?.team_name}
+          </Text>
+          <Text style={styles.lastText}>
+            {matchDetail?.item?.team2data?.team_name}
+          </Text>
         </View>
 
         <View style={styles.middleLastContainer}>
           <View style={styles.middleInnerFirst}>
             <Image
               source={{
-                uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Flag_of_Afghanistan_%281929%E2%80%931931%29.svg/2560px-Flag_of_Afghanistan_%281929%E2%80%931931%29.svg.png',
+                uri: matchDetail?.item?.team1data?.team_logo,
               }}
               style={styles.teamImageContainer}
               resizeMode="cover"
             />
 
             <Text style={[styles.teamShortName, {paddingStart: wp(3)}]}>
-              AFG
+              {matchDetail?.item?.team1data?.team_short_name}
             </Text>
           </View>
           <View style={styles.middleInnerSecend}>
-            <Text style={styles.middleText}>7 Sep</Text>
-            <Text style={styles.middleText}>7:30 PM</Text>
+            <Text style={styles.middleText}>
+              {shortDate?.toString('YYYY-MM-dd')?.split(' ')[2] +
+                ' ' +
+                shortDate?.toString('YYYY-MM-dd')?.split(' ')[1]}
+            </Text>
+            <Text style={styles.middleText}>
+              {
+                shortDate
+                  .toLocaleDateString('en-US', {
+                    hour12: true,
+                    minute: 'numeric',
+                    hour: 'numeric',
+                  })
+                  ?.split(', ')[1]
+              }
+            </Text>
           </View>
           <View style={styles.middleInnerLast}>
-            <Text style={[styles.teamShortName, {paddingEnd: wp(3)}]}>IND</Text>
+            <Text style={[styles.teamShortName, {paddingEnd: wp(3)}]}>
+              {matchDetail?.item?.team2data?.team_short_name}
+            </Text>
             <Image
               source={{
-                uri: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png',
+                uri: matchDetail?.item?.team2data?.team_logo,
               }}
               style={styles.teamImageContainer}
               resizeMode="cover"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {COLORS} from '../Constants';
 import {
@@ -7,26 +7,40 @@ import {
 } from 'react-native-responsive-screen';
 import {ScrollView} from 'react-native-gesture-handler';
 import UpcommingMatchCard from '../Components/UpcommingMatchCard';
+import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {getUpcomming} from '../https';
+import {FlashList} from '@shopify/flash-list';
 
-const Upcommingscreen = () => {
+const Upcommingscreen = ({route}) => {
+  const [matchList, setMatchList] = useState();
+  useEffect(() => {
+    getUpcommingMatch();
+  }, []);
+
+  const getUpcommingMatch = async () => {
+    const params = {
+      category_id: route?.category_id,
+    };
+    try {
+      const {data} = await getUpcomming(params);
+      setMatchList(data?.ResultData);
+    } catch (err) {
+      console.log('Error for getupcommingmatch in match screen ---->', err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* Card for march */}
-      <ScrollView style={styles.innerContainer}>
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-      </ScrollView>
-
-      {/* here advertisement setup */}
-      <View style={{flex: 0.12, borderTopWidth: 1, justifyContent: 'center'}}>
-        <Text style={[{color: COLORS.black, alignSelf: 'center'}]}>
-          Adverticement Pannel
-        </Text>
-        {/* here advertisement setup */}
-      </View>
+      <FlashList
+        showsVerticalScrollIndicator={false}
+        data={matchList}
+        numColumns={1}
+        extraData={100}
+        estimatedItemSize={50}
+        renderItem={item => <UpcommingMatchCard matchDetail={item} />}
+      />
+      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
     </View>
   );
 };
@@ -35,7 +49,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.lightWhite,
-    // backgroundColor: 'rgba(255, 255, 255, 0)',
   },
   innerContainer: {
     flex: 1,

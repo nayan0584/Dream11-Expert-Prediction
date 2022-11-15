@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Image,
   StyleSheet,
@@ -7,27 +7,32 @@ import {
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Button} from 'react-native-paper';
 import {COLORS} from '../Constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
+import {setSubscription} from '../Slices/Adslice';
 
 const GameCard = ({itemDetail}) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {subscription} = useSelector(state => state?.Ads);
 
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
+        // dispatch(setSubscription());
         navigation.navigate('Matchscreen', {
-          matchInfo: itemDetail,
+          category_id: itemDetail?.item?.category_id,
+          playName: itemDetail?.item?.category_name,
         });
       }}>
       <View style={styles.nameContainer}>
-        <Text style={styles.gameName}>{itemDetail?.item?.title}</Text>
+        <Text style={styles.gameName}>{itemDetail?.item?.category_name}</Text>
       </View>
       <View style={styles.nameContainer}>
         <Image
-          source={{uri: itemDetail?.item?.image, cache: 'force-cache'}}
+          source={{uri: itemDetail?.item?.category_logo, cache: 'force-cache'}}
           resizeMode="contain"
           style={styles.imageContainer}
         />

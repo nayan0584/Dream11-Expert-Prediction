@@ -7,6 +7,7 @@ import {
 } from 'react-native-responsive-screen';
 import {ScrollView} from 'react-native-gesture-handler';
 import UpcommingMatchCard from '../Components/UpcommingMatchCard';
+import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
 
 const Completescreen = () => {
   return (
@@ -20,13 +21,7 @@ const Completescreen = () => {
         <UpcommingMatchCard />
       </ScrollView>
 
-      {/* here advertisement setup */}
-      <View style={{flex: 0.12, borderTopWidth: 1, justifyContent: 'center'}}>
-        <Text style={[{color: COLORS.black, alignSelf: 'center'}]}>
-          Adverticement Pannel
-        </Text>
-        {/* here advertisement setup */}
-      </View>
+      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
     </View>
   );
 };

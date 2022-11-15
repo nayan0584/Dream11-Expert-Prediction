@@ -257,6 +257,9 @@ dependencies {
     // Vector Icons
     implementation project(':react-native-vector-icons')
 
+    // Admob Ads
+    implementation 'com.google.android.gms:play-services-ads:21.3.0'
+
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

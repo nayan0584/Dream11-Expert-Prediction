@@ -1,5 +1,9 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 import CustomDrawer from './CustomDrawer';
 import StackNavigator from './StackNavigator';
@@ -25,6 +29,9 @@ const DrawerNavigation = () => {
         drawerActiveBackgroundColor: COLORS.primary,
         drawerActiveTintColor: COLORS.white,
         drawerInactiveTintColor: COLORS.darkBlack,
+        drawerStyle: {
+          width: wp(88.9),
+        },
       }}
       useLegacyImplementation
       drawerContent={props => <CustomDrawer {...props} />}>
