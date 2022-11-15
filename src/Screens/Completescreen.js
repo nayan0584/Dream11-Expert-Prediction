@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {COLORS} from '../Constants';
 import {
@@ -8,18 +8,37 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import UpcommingMatchCard from '../Components/UpcommingMatchCard';
 import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {FlashList} from '@shopify/flash-list';
+import {getComplete} from '../https';
 
-const Completescreen = () => {
+const Completescreen = ({route}) => {
+  const [matchList, setMatchList] = useState();
+  useEffect(() => {
+    getCompleteMatch();
+  }, []);
+
+  const getCompleteMatch = async () => {
+    const params = {
+      category_id: route?.category_id,
+    };
+    try {
+      const {data} = await getComplete(params);
+      setMatchList(data?.ResultData);
+    } catch (err) {
+      console.log('Error for getupcommingmatch in match screen ---->', err);
+    }
+  };
   return (
     <View style={styles.container}>
       {/* Card for march */}
-      <ScrollView style={styles.innerContainer}>
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-        <UpcommingMatchCard />
-      </ScrollView>
+      <FlashList
+        showsVerticalScrollIndicator={false}
+        data={matchList}
+        numColumns={1}
+        extraData={100}
+        estimatedItemSize={50}
+        renderItem={item => <UpcommingMatchCard matchDetail={item} />}
+      />
 
       <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
     </View>

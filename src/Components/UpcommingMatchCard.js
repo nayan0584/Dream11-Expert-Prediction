@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Vibration,
+} from 'react-native';
 import {COLORS} from '../Constants';
 import {
   heightPercentageToDP as hp,
@@ -10,6 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 const UpcommingMatchCard = ({matchDetail}) => {
   const navigation = useNavigation();
   const shortDate = new Date(matchDetail?.item?.match_date);
+  console.log('matchDetail --------->', matchDetail);
 
   return (
     <TouchableOpacity
@@ -23,10 +31,10 @@ const UpcommingMatchCard = ({matchDetail}) => {
 
       <View style={styles.middleContainer}>
         <View style={styles.middleFirstContainer}>
-          <Text style={styles.lastText}>
+          <Text style={styles.lastText} numberOfLines={1} ellipsizeMode="tail">
             {matchDetail?.item?.team1data?.team_name}
           </Text>
-          <Text style={styles.lastText}>
+          <Text style={styles.lastText} numberOfLines={1} ellipsizeMode="tail">
             {matchDetail?.item?.team2data?.team_name}
           </Text>
         </View>
@@ -41,7 +49,7 @@ const UpcommingMatchCard = ({matchDetail}) => {
               resizeMode="cover"
             />
 
-            <Text style={[styles.teamShortName, {paddingStart: wp(3)}]}>
+            <Text style={[styles.teamShortName, {paddingStart: wp(1)}]}>
               {matchDetail?.item?.team1data?.team_short_name}
             </Text>
           </View>
@@ -64,7 +72,7 @@ const UpcommingMatchCard = ({matchDetail}) => {
             </Text>
           </View>
           <View style={styles.middleInnerLast}>
-            <Text style={[styles.teamShortName, {paddingEnd: wp(3)}]}>
+            <Text style={[styles.teamShortName, {paddingEnd: wp(1)}]}>
               {matchDetail?.item?.team2data?.team_short_name}
             </Text>
             <Image
@@ -79,8 +87,8 @@ const UpcommingMatchCard = ({matchDetail}) => {
       </View>
 
       <View style={styles.lastContainer}>
-        <Text style={styles.lastText}>Dream Team</Text>
-        <Text style={styles.lastText}>View Team</Text>
+        <Text style={styles.lastTextnew}>Dream Team</Text>
+        <Text style={styles.lastTextnew}>View Team</Text>
       </View>
     </TouchableOpacity>
   );
@@ -111,7 +119,7 @@ const styles = StyleSheet.create({
   },
   topContainerText: {
     color: COLORS.white,
-    fontSize: hp(2.2),
+    fontSize: hp(1.9),
     marginStart: wp(4),
     fontFamily: 'Inter-Bold',
   },
@@ -123,8 +131,10 @@ const styles = StyleSheet.create({
     flex: 0.4,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: wp(4.5),
+    paddingHorizontal: wp(2),
     alignItems: 'center',
+    alignContent: 'space-between',
+    alignSelf: 'auto',
   },
   middleLastContainer: {
     flex: 1,
@@ -134,7 +144,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingStart: wp(4),
+    paddingStart: wp(1),
+    alignSelf: 'center',
+    justifyContent: 'space-evenly',
   },
   teamImageContainer: {
     height: hp(8),
@@ -145,28 +157,33 @@ const styles = StyleSheet.create({
   teamShortName: {
     color: COLORS.black,
     fontFamily: 'Inter-ExtraBold',
+    fontSize: hp(1.7),
   },
   middleInnerSecend: {
     flex: 0.7,
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
   middleText: {
     color: COLORS.darkGrey,
     fontFamily: 'Inter-Medium',
+    fontSize: hp(1.7),
   },
   middleInnerLast: {
     flex: 1,
+    justifyContent: 'space-evenly',
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingStart: wp(4),
+    paddingEnd: wp(1),
   },
   lastContainer: {
     height: hp(6),
     backgroundColor: COLORS.third,
     justifyContent: 'center',
     flexDirection: 'row',
-    // flex: 1,
     justifyContent: 'space-between',
     paddingHorizontal: wp(4),
     alignItems: 'center',
@@ -174,7 +191,14 @@ const styles = StyleSheet.create({
   lastText: {
     color: COLORS.black,
     fontFamily: 'Inter-Medium',
-    fontSize: hp(2),
+    fontSize: hp(1.6),
+    justifyContent: 'space-between',
+  },
+  lastTextnew: {
+    color: COLORS.black,
+    fontFamily: 'Inter-Medium',
+    fontSize: hp(1.8),
+    justifyContent: 'space-between',
   },
 });
 
