@@ -8,7 +8,8 @@ import {
 } from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAds} from '../Ads';
 
 const currentHeight = Dimensions.get('screen').height;
 const flexs = 0.1;
@@ -31,7 +32,7 @@ const Fullscreenteam = ({route}) => {
         />
       </View>
 
-      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
+      {BannerAds(BannerAdSize.ADAPTIVE_BANNER, TestIds.BANNER)}
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   StyleSheet,
@@ -11,16 +11,23 @@ import {COLORS} from '../Constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {setSubscription} from '../Slices/Adslice';
+import {TestIds} from '@react-native-admob/admob';
+import {InterstitialAds} from '../Ads';
 
 const GameCard = ({itemDetail}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const {subscription} = useSelector(state => state?.Ads);
+  const [initialAds, setInitialAds] = useState(false);
+
+  // console.log('initialAds ---->', initialAds),
+  // initialAds && InterstitialAds(TestIds.INTERSTITIAL);
 
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
+        // setInitialAds(true);
         // dispatch(setSubscription());
         navigation.navigate('Matchscreen', {
           category_id: itemDetail?.item?.category_id,

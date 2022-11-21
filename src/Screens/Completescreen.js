@@ -10,6 +10,7 @@ import UpcommingMatchCard from '../Components/UpcommingMatchCard';
 import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
 import {FlashList} from '@shopify/flash-list';
 import {getComplete} from '../https';
+import {BannerAds} from '../Ads';
 
 const Completescreen = ({route}) => {
   const [matchList, setMatchList] = useState();
@@ -39,8 +40,7 @@ const Completescreen = ({route}) => {
         estimatedItemSize={50}
         renderItem={item => <UpcommingMatchCard matchDetail={item} />}
       />
-
-      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
+      {BannerAds(BannerAdSize.ADAPTIVE_BANNER, TestIds.BANNER)}
     </View>
   );
 };

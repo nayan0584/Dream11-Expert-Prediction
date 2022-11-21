@@ -7,9 +7,10 @@ import {
 } from 'react-native-responsive-screen';
 import {ScrollView} from 'react-native-gesture-handler';
 import UpcommingMatchCard from '../Components/UpcommingMatchCard';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAdSize, TestIds} from '@react-native-admob/admob';
 import {getUpcomming} from '../https';
 import {FlashList} from '@shopify/flash-list';
+import {BannerAds} from '../Ads';
 
 const Upcommingscreen = ({route}) => {
   const [matchList, setMatchList] = useState();
@@ -40,7 +41,7 @@ const Upcommingscreen = ({route}) => {
         estimatedItemSize={50}
         renderItem={item => <UpcommingMatchCard matchDetail={item} />}
       />
-      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
+      {BannerAds(BannerAdSize.ADAPTIVE_BANNER, TestIds.BANNER)}
     </View>
   );
 };

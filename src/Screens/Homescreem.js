@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAdSize, TestIds} from '@react-native-admob/admob';
 
 import {COLORS} from '../Constants/index';
 import {DUMMY_SPORT} from '../../assets/Data/DummyData';
@@ -10,10 +10,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import Header from '../Components/Header';
 import {getAppInfo, getCategories} from '../https';
 import {setAppInfo} from '../Slices/Detailslice';
+import {AppOpenAds, BannerAds} from '../Ads';
 
 const Homescreem = () => {
   const dispatch = useDispatch();
   const [categoriesData, setCategoriesData] = useState();
+  const {subscription} = useSelector(state => state.Ads);
+
+  // AppOpenAds Function for Set-up
+  AppOpenAds(TestIds.APP_OPEN);
 
   useEffect(() => {
     getAppDetail();
@@ -63,7 +68,7 @@ const Homescreem = () => {
           renderItem={item => <GameCard itemDetail={item} />}
         />
       </View>
-      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
+      {BannerAds(BannerAdSize.ADAPTIVE_BANNER, TestIds.BANNER)}
     </View>
   );
 };

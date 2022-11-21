@@ -3,9 +3,10 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import UpcommingMatchCard from '../Components/UpcommingMatchCard';
 import {COLORS} from '../Constants';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAdSize, TestIds} from '@react-native-admob/admob';
 import {getLive} from '../https';
 import {FlashList} from '@shopify/flash-list';
+import {BannerAds} from '../Ads';
 
 const Livescreen = ({route}) => {
   const [matchList, setMatchList] = useState();
@@ -36,7 +37,7 @@ const Livescreen = ({route}) => {
         renderItem={item => <UpcommingMatchCard matchDetail={item} />}
       />
 
-      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
+      {BannerAds(BannerAdSize.ADAPTIVE_BANNER, TestIds.BANNER)}
     </View>
   );
 };

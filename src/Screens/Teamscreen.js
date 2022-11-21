@@ -10,7 +10,8 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import {useNavigation} from '@react-navigation/native';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAds} from '../Ads';
 
 const Teamscreen = ({route}) => {
   const navigation = useNavigation();
@@ -53,7 +54,7 @@ const Teamscreen = ({route}) => {
         />
       </View>
 
-      <BannerAd size={BannerAdSize.ADAPTIVE_BANNER} unitId={TestIds.BANNER} />
+      {BannerAds(BannerAdSize.ADAPTIVE_BANNER, TestIds.BANNER)}
     </View>
   );
 };

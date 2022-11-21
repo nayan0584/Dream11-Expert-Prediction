@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {LogBox, StatusBar, View} from 'react-native';
 import Router from './src/Router';
 import {COLORS} from './src/Constants/index';

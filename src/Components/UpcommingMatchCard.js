@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Vibration,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {COLORS} from '../Constants';
 import {
   heightPercentageToDP as hp,
@@ -17,7 +10,6 @@ import {useNavigation} from '@react-navigation/native';
 const UpcommingMatchCard = ({matchDetail}) => {
   const navigation = useNavigation();
   const shortDate = new Date(matchDetail?.item?.match_date);
-  console.log('matchDetail --------->', matchDetail);
 
   return (
     <TouchableOpacity
