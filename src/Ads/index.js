@@ -33,12 +33,12 @@ export const AppOpenAds = Uid => {
 };
 
 export const InterstitialAds = Uid => {
-  const [interstitialAds, setinterstitialAds] = useState(InterstitialAd | null);
+  const [interstitialAds, setInterstitialAds] = useState(InterstitialAd | null);
   const [adLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
     const InterstitialAdsCreate = InterstitialAd.createAd(Uid);
-    setinterstitialAds(InterstitialAdsCreate);
+    setInterstitialAds(InterstitialAdsCreate);
 
     const loadSubscription = InterstitialAdsCreate.addEventListener(
       'onAdLoaded',
@@ -47,7 +47,7 @@ export const InterstitialAds = Uid => {
       },
     );
 
-    const faildSubscription = InterstitialAdsCreate.addEventListener(
+    const failedSubscription = InterstitialAdsCreate.addEventListener(
       'onAdDismissed',
       () => {
         setAdLoaded(false);
@@ -58,6 +58,6 @@ export const InterstitialAds = Uid => {
       InterstitialAd.show();
     }
 
-    return () => loadSubscription.remove(), faildSubscription.remove();
+    return () => loadSubscription.remove(), failedSubscription.remove();
   }, []);
 };

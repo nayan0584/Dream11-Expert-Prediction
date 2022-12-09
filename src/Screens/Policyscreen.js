@@ -1,12 +1,20 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import BackHeader from '../Components/BackHeader';
 
 const Policyscreen = () => {
   return (
-    <View>
-      <Text>Policyscreen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      {/* Header */}
+      <BackHeader HeadingTitle="Privacy Policy" />
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default Policyscreen;

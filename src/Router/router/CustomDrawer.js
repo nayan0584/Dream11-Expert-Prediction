@@ -38,7 +38,11 @@ const CustomDrawer = props => {
             <TouchableOpacity style={{flexDirection: 'row'}}>
               <FontAwesome name="info-circle" color={COLORS.white} size={18} />
               <Text style={styles.premiumText}>
-                Version {AppDetail?.ResultData?.app_version}
+                {`Version ${
+                  AppDetail?.ResultData?.app_version
+                    ? AppDetail?.ResultData?.app_version
+                    : '1.0'
+                }`}
               </Text>
             </TouchableOpacity>
           </View>
